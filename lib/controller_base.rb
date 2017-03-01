@@ -54,6 +54,7 @@ class ControllerBase
   def invoke_action(name)
     path_attribs = req.path.split('/')
     possible_controllers = []
+
     path_attribs.each do |attrib|
       break if :"#{attrib}" == name
       possible_controllers << attrib
@@ -61,7 +62,7 @@ class ControllerBase
 
     target_controller = possible_controllers.last
     target_controller_name = "#{target_controller.pluralize.capitalize}Controller"
-    unless target_controller_name.constantize.send(:"#{name}")
+    unless self.send(:"#{name}")
       render(name)
     end
   end

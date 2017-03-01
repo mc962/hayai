@@ -7,8 +7,7 @@ $dragons = [
   { id: 2, name: "Draco" }
 ]
 
-class DragonsController < ControllerBase
-  debugger
+class DragonsController < ControllerBase  
   def index
     render_content($dragons.to_json, 'application/json')
   end
