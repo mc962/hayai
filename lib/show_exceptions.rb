@@ -1,5 +1,6 @@
 require 'erb'
 require 'byebug'
+
 class ShowExceptions
   attr_reader :app
   def initialize(app)
@@ -53,7 +54,7 @@ class ShowExceptions
 
   def format_source(source_lines, source_line_num)
     start = [0, source_line_num - 3].max
-    lines = source_lines[start..(start + 5)]    
+    lines = source_lines[start..(start + 5)]
     Hash[*(start+1..(lines.count + start)).zip(lines).flatten]
   end
 end
