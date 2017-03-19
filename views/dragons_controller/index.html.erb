@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Dragons
+    </title>
+  </head>
+  <body>
+    <h1>Here be Dragons</h1>
+    <table>
+    <% @dragons.each do |dragon| %>
+      <tr>
+        <td>
+          <img class='dragon-picture' src="<%= dragon[:picture_url] %>" alt="A dragon">
+        </td>
+        <td>
+          <a href='<%= "dragons/#{dragon[:id]}" %>' class='dragon-name'><%= dragon[:name] %></a>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  </body>
+</html>
