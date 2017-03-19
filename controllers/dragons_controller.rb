@@ -2,23 +2,27 @@ require 'rack'
 require_relative '../lib/controller_base'
 require_relative '../lib/router'
 
-$dragons = [
-  { id: 1, name: "Ryuu" },
-  { id: 2, name: "Draco" }
+DRAGONS = [
+  { id: 1, name: "Ryuu", picture_url: 'http://orig10.deviantart.net/9231/f/2014/039/c/2/c2d21022ee46616b6257dfd3a330f1b9-d75mzg9.jpg' },
+  { id: 2, name: "Draco", picture_url: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/800x480-Y_Ddraig_Goch.png' }
 ]
 
-class DragonsController < ControllerBase  
+class DragonsController < ControllerBase
+
   def index
-    render_content($dragons.to_json, 'application/json')
+    @dragons = DRAGONS
+    render :index
   end
 
   def show
-
+    @dragon = DRAGONS[params["dragon_id"].to_i-1]
+    render :show
   end
 end
 
 router = Router.new
 router.draw do
+  get Regexp.new("/"), DragonsController, :index
   get Regexp.new("^/dragons$"), DragonsController, :index
   get Regexp.new("^/dragons/(?<dragon_id>\\d+)"), DragonsController, :show
 end
