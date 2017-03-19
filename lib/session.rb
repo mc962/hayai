@@ -3,10 +3,10 @@ require 'json'
 class Session
 
   def initialize(req)
-    if req.cookies['_app_session'].nil?
+    if req.cookies['_rails_lite_app'].nil?
       @cookie = {}
     else
-      @cookie = JSON.parse(req.cookies['_app_session'])
+      @cookie = JSON.parse(req.cookies['_rails_lite_app'])
     end
   end
 
@@ -19,6 +19,6 @@ class Session
   end
 
   def store_session(res)
-    res.set_cookie('_app_session', @cookie.to_json)
+    res.set_cookie("_rails_lite_app", value: @cookie.to_json, path: '/')
   end
 end
