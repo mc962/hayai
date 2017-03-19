@@ -3,6 +3,7 @@ require 'active_support/core_ext'
 require 'erb'
 require_relative './session'
 require 'active_support/inflector'
+require_relative './flash'
 
 class ControllerBase
   attr_reader :req, :res, :params
@@ -24,46 +25,48 @@ class ControllerBase
     raise 'Double render error' if already_built_response?
     res.status= 302
     res.location= url
-    session.store_session(@res)
 
     @already_built_response = true
+    session.store_session(res)
+    flash.store_flash(res)
+    nil
   end
 
   def render_content(content, content_type)
     raise 'Double render error' if already_built_response?
-    session.store_session(@res)
+
     self.res.write(content)
-    self.res['Content-Type']= content_type
+    self.res['Content-Type'] = content_type
 
     @already_built_response = true
+    session.store_session(res)
+    flash.store_flash(res)
+    nil
   end
 
   def render(template_name)
-    file_path = "../views/#{self.class.to_s.underscore}/#{template_name}.html.erb"
-    raise 'File not found' unless File.file?(file_path)
-    html_content = File.open(file_path).read
+    directory_path = File.dirname(__FILE__)
+    controller_folder = self.class.to_s.underscore
 
-    template = ERB.new(html_content).result(binding)
+    template_path_name = File.join(directory_path, '..', 'views', controller_folder, "#{template_name}.html.erb")
+
+    raise 'File not found' unless File.file?(template_path_name)
+    content_template_code = File.read(template_path_name)
+    template = ERB.new(content_template_code).result(binding)
     render_content(template, 'text/html')
   end
 
-  def session
-    @session ||= Session.new(@req)
+  def flash
+    @flash ||= Flash.new(req)
   end
 
+  def session
+    @session ||= Session.new(req)
+  end
+
+
   def invoke_action(name)
-    path_attribs = req.path.split('/')
-    possible_controllers = []
-
-    path_attribs.each do |attrib|
-      break if :"#{attrib}" == name
-      possible_controllers << attrib
-    end
-
-    target_controller = possible_controllers.last
-    target_controller_name = "#{target_controller.pluralize.capitalize}Controller"
-    unless self.send(:"#{name}")
-      render(name)
-    end
+    self.send(name)
+    render(name) unless already_built_response?
   end
 end
