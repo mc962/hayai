@@ -5,16 +5,17 @@
     <title>
       Dragons
     </title>
+    <link rel="stylesheet" href="../../public/dragons.css">
   </head>
   <body>
     <h1>Here be Dragons</h1>
-    <table>
+    <table class='dragons-list'>
     <% @dragons.each do |dragon| %>
-      <tr>
-        <td>
+      <tr class='dragon-container'>
+        <td class='dragon-picture-container'>
           <img class='dragon-picture' src="<%= dragon[:picture_url] %>" alt="A dragon">
         </td>
-        <td>
+        <td class='dragon-description-container'>
           <a href='<%= "dragons/#{dragon[:id]}" %>' class='dragon-name'><%= dragon[:name] %></a>
         </td>
       </tr>
