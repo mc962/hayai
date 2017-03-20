@@ -13,6 +13,8 @@ class ControllerBase
     @req = req
     @res = res
     @params = req.params.merge!(route_params)
+
+    @@protect_from_forgery ||= false
   end
 
 
@@ -27,8 +29,10 @@ class ControllerBase
     res.location= url
 
     @already_built_response = true
+
     session.store_session(res)
     flash.store_flash(res)
+
     nil
   end
 
@@ -39,8 +43,10 @@ class ControllerBase
     self.res['Content-Type'] = content_type
 
     @already_built_response = true
+
     session.store_session(res)
     flash.store_flash(res)
+
     nil
   end
 
@@ -64,9 +70,48 @@ class ControllerBase
     @session ||= Session.new(req)
   end
 
-
   def invoke_action(name)
+    if protect_from_forgery? && !req.get?
+      check_authenticity_token
+    else
+      form_authenticity_token
+    end
+
     self.send(name)
     render(name) unless already_built_response?
+
+    nil
+  end
+
+  def form_authenticity_token
+    @auth_token ||= generate_authenticity_token
+
+    res.set_cookie('authenticity_token', value: @auth_token, path: '/')
+    @auth_token
+  end
+
+  protected
+
+  def self.protect_from_forgery
+    @@protect_from_forgery = true
+  end
+
+  private
+
+
+  def protect_from_forgery?
+    @@protect_from_forgery
+  end
+
+  def check_authenticity_token
+    token_cookie = req.cookies['authenticity_token']
+
+    unless token_cookie && params['authenticity_token'] == token_cookie
+      raise 'Invalid authenticity token'
+    end
+  end
+
+  def generate_authenticity_token
+    SecureRandom.urlsafe_base64(16)
   end
 end
