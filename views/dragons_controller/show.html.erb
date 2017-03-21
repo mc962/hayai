@@ -3,12 +3,30 @@
   <head>
     <meta charset="utf-8">
     <title><%= @dragon.name%></title>
-    <link rel="stylesheet" href="../../public/dragons.css">
+    <link rel="stylesheet" href="../public/dragons.css">
   </head>
   <body>
+    <h1><%= @dragon.name %></h1>
     <div class="dragon-info">
-      <h1><%= @dragon.name %></h1>
       <img class='dragon-show-picture' src="<%= @dragon.picture_url %>" alt="A dragon">
+      <h3 class='rider-name'>Rider: <%= @dragon.rider.fname %> <%= @dragon.rider.lname %></h3>
+
+      <div class="memories-container">
+        <h3>Memories</h3>
+        <ul class='memories-list'>
+          <% @dragon.memories.each do |memory| %>
+          <li class='memory-container'>
+            <div class="memory-location">
+              <strong>Location:</strong> <%= memory.location %>
+            </div>
+            <div class="memory-content">
+              <%= memory.content %>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
     </div>
     <a href="/dragons">Back to the Dragon Nest</a>
   </body>

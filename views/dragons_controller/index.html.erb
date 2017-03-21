@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <title>
       Dragons
     </title>
-    <link rel="stylesheet" href="../../public/dragons.css">
+    <link rel="stylesheet" href="public/dragons.css">
   </head>
+
+
   <body>
     <h1>Here be Dragons</h1>
-    <table class='dragons-list'>
+    <div class='dragons-list'>
     <% @dragons.each do |dragon| %>
-      <tr class='dragon-container'>
-        <td class='dragon-picture-container'>
+      <div class='dragon-container'>
+
           <img class='dragon-picture' src="<%= dragon.picture_url %>" alt="A dragon">
-        </td>
-        <td class='dragon-description-container'>
+
+        
           <a href='<%= "dragons/#{dragon.id}" %>' class='dragon-name'><%= dragon.name %></a>
-        </td>
-      </tr>
+
+      </div>
     <% end %>
-    </table>
+  </div>
   </body>
+
 </html>

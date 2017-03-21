@@ -1,4 +1,5 @@
 database_name = ARGV[0]
+raise 'No database specified' unless database_name
 
 def setup_database(db_name)
   dir = File.dirname(__FILE__)
@@ -6,9 +7,20 @@ def setup_database(db_name)
   sql_path = File.join(dir, '/', "sqlite_sql/#{db_name}.sql")
 
   begin
-    system "dropdb #{db_name}"
-    system "createdb #{db_name}"
-    system "sqlite3 #{db_path} < #{sql_path}"
+
+    puts "WARNING: Following action will reset database to preconfigured SQL file"
+    print "\nPress c to continue, or any other key to exit: "
+    choice = $stdin.gets.chomp
+
+    if choice == 'c'
+
+      File.delete(db_path)
+      system "dropdb #{db_name}"
+      system "createdb #{db_name}"
+      system "sqlite3 #{db_path} < #{sql_path}"
+    else      
+      exit(0)
+    end
   rescue
     # later do error checking through ruby instead of letting shell throw error, but for now is fine
   end

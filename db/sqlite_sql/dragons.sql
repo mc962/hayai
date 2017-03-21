@@ -18,7 +18,7 @@ CREATE TABLE dragons (
 
 CREATE TABLE memories (
   id INTEGER PRIMARY KEY,
-  memory VARCHAR(255) NOT NULL,
+  content VARCHAR(255) NOT NULL,
   location VARCHAR(255) NOT NULL,
   picture_url VARCHAR(255) DEFAULT '',
   dragon_id INTEGER,
@@ -41,7 +41,7 @@ VALUES
   (5, "Firnen", '/public/firnen-pic.jpg', 5);
 
 INSERT INTO
-  memories (id, memory, location, dragon_id)
+  memories (id, content, location, dragon_id)
 VALUES
   (1, "Made some fire", "Dragon Town", 1),
   (2, "Did some hunting", "Dragon Land", 1),
