@@ -1,9 +1,13 @@
 require 'rack'
 require_relative '../lib/static'
 require_relative '../lib/show_exceptions'
-
+require_relative './mc_loader'
+load_controllers
+load_models
 require_relative '../lib/router'
 require_relative './routes.rb'
+
+
 
 
 

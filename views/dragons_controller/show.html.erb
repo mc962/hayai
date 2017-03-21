@@ -2,13 +2,13 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title><%= @dragon[:name]%></title>
+    <title><%= @dragon.name%></title>
     <link rel="stylesheet" href="../../public/dragons.css">
   </head>
   <body>
     <div class="dragon-info">
-      <h1><%= @dragon[:name] %></h1>
-      <img class='dragon-show-picture' src="<%= @dragon[:picture_url] %>" alt="A dragon">
+      <h1><%= @dragon.name %></h1>
+      <img class='dragon-show-picture' src="<%= @dragon.picture_url %>" alt="A dragon">
     </div>
     <a href="/dragons">Back to the Dragon Nest</a>
   </body>

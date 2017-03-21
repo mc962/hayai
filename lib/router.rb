@@ -31,18 +31,10 @@ class Router
 
   def initialize
     @routes = []
-    load_controllers
+    # load_controllers
   end
 
-  def load_controllers
-    dir = File.dirname(__FILE__)
-    controllers_directory = File.join(dir, '..', "/controllers")
 
-    controller_files = Dir["#{controllers_directory}/*.rb"]
-    controller_files.each do |file|
-      require_relative file
-    end
-  end
 
   def add_route(pattern, method, controller_class, action_name)
     @routes << Route.new(pattern, method, controller_class, action_name)
