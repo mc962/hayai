@@ -85,6 +85,7 @@ class SQLObject
     col_names = self.class.columns.drop(1).join(', ')
     question_marks = ['?'] * attribute_values.length
     question_marks = question_marks.join(', ')
+
     DBConnection.execute(<<-SQL, *attribute_values)
       INSERT INTO
         #{self.class.table_name}(#{col_names})

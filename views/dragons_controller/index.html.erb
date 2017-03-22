@@ -18,12 +18,16 @@
 
           <img class='dragon-picture' src="<%= dragon.picture_url %>" alt="A dragon">
 
-        
+
           <a href='<%= "dragons/#{dragon.id}" %>' class='dragon-name'><%= dragon.name %></a>
 
       </div>
     <% end %>
   </div>
+
+  <footer>
+    <a href="dragons/new" class='new-dragon-anchor'>Hatch a Dragon!</a>
+  </footer>
   </body>
 
 </html>

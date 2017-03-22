@@ -3,11 +3,15 @@
 <form class="dragon-form" action="/dragons" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <input type="text" class='dragon-name-input' name="dragons[name]" value="">
-  <select class="riders-list" name="dragons[rider_id]">
+  <input type="text" class='dragon-name-input' name="dragon[name]" value="">
+
+  <label for="dragon-picture">Enter name of dragon picture file</label>
+  <input type="text" id='dragon-picture' name="dragon[picture_url]" value="">
+
+  <select class="riders-list" name="dragon[rider_id]">
     <option value="" selected disabled>Select my Rider</option>
-    <% available_riders.each do |rider| %>
-      <option value="<%= rider.id %>">rider.fname rider.lname</option>
+    <% @available_riders.each do |rider| %>
+      <option value="<%= rider.id %>"><%= "#{rider.fname} #{rider.lname}" %></option>
     <% end %>
   </select>
 

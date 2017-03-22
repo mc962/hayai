@@ -14,11 +14,11 @@ def setup_database(db_name)
 
     if choice == 'c'
 
-      File.delete(db_path)
+      File.delete(db_path) if File.file?(db_path)
       system "dropdb #{db_name}"
       system "createdb #{db_name}"
       system "sqlite3 #{db_path} < #{sql_path}"
-    else      
+    else
       exit(0)
     end
   rescue
