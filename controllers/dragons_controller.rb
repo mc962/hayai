@@ -2,12 +2,16 @@ require 'rack'
 require_relative '../lib/controller_base'
 
 
-DRAGONS = [
-  { id: 1, name: "Ryuu", picture_url: '../public/ryuu-pic.jpg' },
-  { id: 2, name: "Draco", picture_url: '../public/draco-pic.png' }
-]
 require 'byebug'
 class DragonsController < ControllerBase
+
+  def new
+    @dragon = Dragon.new
+    render :new
+  end
+
+  def create
+  end
 
   def index
     @dragons = Dragon.all
@@ -15,7 +19,7 @@ class DragonsController < ControllerBase
   end
 
   def show
-    
+    @available_riders = Rider.all
     @dragon = Dragon.find(params['dragon_id'])
     render :show
   end

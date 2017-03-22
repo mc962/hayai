@@ -1,0 +1,15 @@
+<h2>Hatch A Dragon!</h2>
+
+<form class="dragon-form" action="/dragons" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <input type="text" class='dragon-name-input' name="dragons[name]" value="">
+  <select class="riders-list" name="dragons[rider_id]">
+    <option value="" selected disabled>Select my Rider</option>
+    <% available_riders.each do |rider| %>
+      <option value="<%= rider.id %>">rider.fname rider.lname</option>
+    <% end %>
+  </select>
+
+  <input type="submit" name="" value="Hatch!">
+</form>
