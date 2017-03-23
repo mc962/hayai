@@ -1,1 +1,27 @@
 <h2>Make Some Changes!</h2>
+
+<form class="dragon-form" action="/dragons/<%= @dragon.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+
+  <input type="text" class='dragon-name-input' name="dragon[name]" value="<%= @dragon.name %>">
+
+  <label for="dragon-picture">Enter new name of dragon picture file</label>
+  <input type="text" id='dragon-picture' name="dragon[picture_url]" value="<%= @dragon.picture_url %>">
+
+  <select class="riders-list" name="dragon[rider_id]">
+    <option value="" disabled>Change my Rider</option>
+    <% @available_riders.each do |rider| %>
+
+      <option value="<%= rider.id %>" <%= rider.id == @dragon.rider.id ? "selected" : "" %>    >
+        <%= "#{rider.fname} #{rider.lname}" %>
+      </option>
+    <% end %>
+  </select>
+
+  <input type="submit" name="" value="Change!">
+</form>
+
+<a href='<%= "/dragons/#{@dragon.id}" %>' class='dragon-name'>Back to <%= @dragon.name %>'s Spot</a>

@@ -20,6 +20,7 @@ app = Proc.new do |env|
 end
 
 APP = Rack::Builder.new do
+  use Rack::MethodOverride
   use ShowExceptions
   use Static
   run app

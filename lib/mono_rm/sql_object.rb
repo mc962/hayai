@@ -126,4 +126,15 @@ class SQLObject
       insert
     end
   end
+
+  def destroy
+    id = self.id
+    DBConnection.execute(<<-SQL, id)
+      DELETE
+      FROM
+        #{self.class.table_name}
+      WHERE
+        id = ?
+    SQL
+  end
 end

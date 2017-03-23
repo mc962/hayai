@@ -51,14 +51,14 @@ class DBConnection
   end
 
   def self.reset
-    commands = [
-      "rm '#{DB_PATH}'",
-      "cat '#{SQL_PATH}' | sqlite3 '#{DB_PATH}'"
-      # "rm '#{DRAGONS_DB_FILE}'",
-      # "cat '#{DRAGONS_SQL_FILE}' | sqlite3 '#{DRAGONS_DB_FILE}'"
-    ]
-
-    commands.each { |command| `#{command}` }
+    # commands = [
+    #   "rm '#{DB_PATH}'",
+    #   "cat '#{SQL_PATH}' | sqlite3 '#{DB_PATH}'"
+    #   # "rm '#{DRAGONS_DB_FILE}'",
+    #   # "cat '#{DRAGONS_SQL_FILE}' | sqlite3 '#{DRAGONS_DB_FILE}'"
+    # ]
+    #
+    # commands.each { |command| `#{command}` }
     DBConnection.open(DB_PATH)
     # DBConnection.open(DRAGONS_DB_FILE)
   end

@@ -65,3 +65,13 @@
 .rider-name {
   margin-right: 2%;
 }
+
+.footer-links a {
+  display: block;
+  margin-bottom: 0.5%;
+}
+
+.delete-button {
+  display: block;
+  margin-bottom: 0.5%;
+}

@@ -28,6 +28,18 @@
       </div>
 
     </div>
-    <a href="/dragons">Back to the Dragon Nest</a>
+    <footer class='footer-links'>
+      <a href="<%= "/dragons/#{@dragon.id}/edit" %>">Change me!</a>
+
+      <a href="/dragons">Back to the Dragon Nest</a>
+      
+      <form class="delete-button" action='<%= "/dragons/#{@dragon.id}" %>' method="post">
+        <input type="hidden" name="_method" value="delete">
+
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" name="" value="Slay the Dragon :O">
+      </form>
+
+    </footer>
   </body>
 </html>
