@@ -3,9 +3,10 @@
 <form class="dragon-form" action="/dragons" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-  <input type="text" class='dragon-name-input' name="dragon[name]" value="">
+  <label for="dragon-name">Dragon Name: </label>
+  <input type="text" id='dragon-name' class='dragon-name-input' name="dragon[name]" value="">
 
-  <label for="dragon-picture">Enter name of dragon picture file</label>
+  <label for="dragon-picture">Enter name of dragon picture file: </label>
   <input type="text" id='dragon-picture' name="dragon[picture_url]" value="">
 
   <select class="riders-list" name="dragon[rider_id]">
