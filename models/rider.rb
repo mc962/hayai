@@ -1,7 +1,6 @@
-require_relative '../lib/mono_rm/model_base'
+require_relative './application_model'
 
-
-class Rider < ModelBase
+class Rider < ApplicationModel
   self.table_name = 'riders'
 
   has_many :dragons

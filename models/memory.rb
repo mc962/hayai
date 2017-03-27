@@ -1,7 +1,6 @@
-require_relative '../lib/mono_rm/model_base'
+require_relative './application_model'
 
-
-class Memory < ModelBase
+class Memory < ApplicationModel
   self.table_name = 'memories'
   belongs_to :dragon
   has_one_through :rider, :dragon, :rider

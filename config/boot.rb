@@ -1,12 +1,21 @@
-require 'rack'
-require_relative '../lib/static'
-require_relative '../lib/show_exceptions'
+require 'pathname'
+
+PROJECT_ROOT_DIR = Pathname.new(__dir__).join("../")
+
+require 'monorm'
+MonoRM::DBInitializer.load_db_adapter
+
+
 require_relative './mc_loader'
 load_controllers
 load_models
+
+
+require 'rack'
+require_relative '../lib/static'
+require_relative '../lib/show_exceptions'
 require_relative '../lib/router'
 require_relative './routes.rb'
-
 
 
 
