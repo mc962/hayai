@@ -1,5 +1,4 @@
 .byebug_history
-Gemfile.lock
 node_modules/
 .ruby-version
 .env
