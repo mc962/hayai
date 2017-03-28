@@ -7,6 +7,9 @@ gem 'byebug'
 gem 'rspec', '~> 3.1.0'
 gem 'activesupport'
 gem 'puma'
-gem 'sqlite3'
 gem 'pg'
 gem 'monorm'
+
+group :development do
+  gem 'sqlite3'
+end
