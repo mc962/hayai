@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.3'
+
 gem 'rack'
 gem 'byebug'
 gem 'rspec', '~> 3.1.0'
