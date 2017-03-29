@@ -5,6 +5,6 @@ require_relative '../config/boot'
 def start_server
   Rack::Server.start(
   app: APP,
-  Port: 3000
+  Port: $PORT
   )
 end
