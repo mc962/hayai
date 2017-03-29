@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <title><%= @dragon.name%></title>
     <link rel="stylesheet" href="../public/dragons.css">
+
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <h1><%= @dragon.name %></h1>
@@ -32,7 +35,7 @@
       <a href="<%= "/dragons/#{@dragon.id}/edit" %>">Change me!</a>
 
       <a href="/dragons">Back to the Dragon Nest</a>
-      
+
       <form class="delete-button" action='<%= "/dragons/#{@dragon.id}" %>' method="post">
         <input type="hidden" name="_method" value="delete">
 

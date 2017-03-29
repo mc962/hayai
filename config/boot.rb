@@ -2,6 +2,11 @@ require 'pathname'
 
 PROJECT_ROOT_DIR = Pathname.new(__dir__).join("../")
 
+unless ENV['RACK_ENV'] == 'production'
+  require 'dotenv'
+  Dotenv.load
+end
+
 require 'monorm'
 MonoRM::DBInitializer.load_db_adapter
 

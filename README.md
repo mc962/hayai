@@ -53,11 +53,25 @@ In the event that you delete something that you want back, and it was present in
 ### ControllerBase
 
 All controllers inherit from this base class. They make up the core of a web request in Hayai,
-consisting of actions to be executed which may render a template or execute another action.
+consisting of actions to be executed which may render a template or execute another action. The base controller is also able to handle Cross Site Request Forgery (CSRF) protection, by specifying `protect_from_forgery` in the child controller class.
 
 ### Router
 
 The Router is responsible for writing new routes using received Regular Expression patterns.
+
+### Flash
+
+The Flash allos the user to display temporary messages through storage in a temporary cookie  `_hayai_app_flash` cookie. Information stored in Flash.now will persist for the current render cycle, while information stored in Flash will persist for the current and next render cycle.
+
+### Session
+
+The session utilizes a `_hayai_app` cookie to store persistent information relative to the session.
+
+### Exceptions
+
+### Static Assets
+
+This middleware provides  the option to serve static assets including CSS, JavaScript, and images. A FileServer class is provided to serve the appropriate files, and is called in the event that a request comes through requesting a static asset.
 
 ## To-Dos
 
