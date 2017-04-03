@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>New Name</title>
+
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <h2>Earn a New Name!</h2>
+
+    <form class="dragon-form" action="<%= "/riders/#{@rider.id}" %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+      <label for="rider-fname">Rider First Name: </label>
+      <input type="text" id='rider-fname' class='rider-name-input' name="rider[fname]" value="<%= @rider.fname %>">
+
+      <label for="rider-lname">Rider First Name: </label>
+      <input type="text" id='rider-lname' class='rider-name-input' name="rider[lname]" value="<%= @rider.lname %>">
+
+
+      <input type="submit" name="" value="Earn Your New Name!">
+    </form>
+
+    <a href="/riders" class='rider-directory-anchor'>Back to Riders Directory</a>
+  </body>
+</html>

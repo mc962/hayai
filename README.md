@@ -10,18 +10,17 @@ custom MonoRM ORM library.
 Hayai requires the Ruby language, as well as git and the Bundler gem to be installed on the system.
 The framework may be downloaded from github by running `git clone https://github.com/mc962/hayai.git`
 Open a terminal window and navigate into the project directory
-Run `bundle install` in the terminal and follow any directions given to you such as installing any requirements that are needed for the application to run.
+Run `bundle install` in the terminal and follow any directions given such as installing any requirements that are needed for the application to run.
 After the system is setup, run the commands below in the terminal to get things started!
 
 ### Application Start
 As a purely Ruby-based application, a Hayai server can be easily be launched by typing
-Ruby *application_name*. The application may be tested by running `ruby bin/hayai.rb`.
+Ruby *application_name*. The demo application may be tested by running `ruby bin/config.ru`.
 If an error is thrown saying that no database is found, run the database setup using
-`ruby db/db_setup.rb`.
+`ruby db/db_setup.rb`. The database may be setup by entering the appropriate information in the DATABASE_URL environment variable, which may be recorded in a `.env` file located in the project's root directory. Be that this file is added to your `.gitignore` file so that it is not committed to github, or do not put place any compromising credentials in it.
 
 ### Interacting With Hayai
 
-Hayai is capable of all 4 of the basic Create, Read, Update, and Destroy actions.
 
 #### Demo App Instructions
 The following are instructions for the demo app bundled into the this repository. After
@@ -31,10 +30,12 @@ the application is set up using the above listed commands, the demo app can be e
 Users may click on a dragon's name to see information for the dragon, or click `Hatch a Dragon!`
 to create a new dragon.
 
+Hayai is capable of all 4 of the basic Create, Read, Update, and Destroy actions.
+
 ##### Hatching a dragon (Create)
 Users may create a dragon by entering the name, adding a url to the location where the picture is stored, and selecting a dragon's rider from the drop down list. Clicking `Hatch!` will send the inputted information to the database to be stored, and then will redirect to the the newly hatched dragon's page.
 
-N.B. Dragon images that are stored locally should be placed in the public folder, and be given a picture url name of /public/<picture name>. The `krypto-pic.jpg` file is an extra picture that is in the public folder to demonstrate the create action.
+N.B. Dragon images that are stored locally should be placed in the public folder, and be given a picture url name of /public/<picture name>. The `krypto-pic.jpg` file is an extra picture in the public folder in order to demonstrate the create action.
 
 ##### Viewing a dragon (Read)
 A dragon's information may be retrieved from the database and displayed on either the dragon's personal page, or as a list of pictures and names on the main index display of dragons. A dragon's show page will also contain it's rider, and some of its memories, pulled from the database through an association.
@@ -46,7 +47,7 @@ by clicking`Change Me!`. This will take users to an edit form that will allow al
 ##### Slaying a dragon (Destroy)
 A dragon may be destroyed and deleted from the database by clicking the `Slay the Dragon` button on the dragon's personal page. The dragon will be immediately deleted from the database, and the user will be redirected to the main dragon list page. Be careful!
 
-In the event that you delete something that you want back, and it was present in the original database seed file, then run `ruby db/db_setup.rb` again to reset the database back to its original state.
+In the event that you delete something that you want back, and it was present in the original database seed file, then run `ruby db/db_setup.rb` again to reset the database back to its original state (This feature may only work locally and not on Heroku).
 
 ## Features
 
@@ -61,7 +62,7 @@ The Router is responsible for writing new routes using received Regular Expressi
 
 ### Flash
 
-The Flash allos the user to display temporary messages through storage in a temporary cookie  `_hayai_app_flash` cookie. Information stored in Flash.now will persist for the current render cycle, while information stored in Flash will persist for the current and next render cycle.
+The Flash allows the user to display temporary messages through storage in a temporary cookie  `_hayai_app_flash` cookie. Information stored in Flash.now will persist for the current render cycle, while information stored in Flash will persist for the current and next render cycle.
 
 ### Session
 
@@ -69,15 +70,15 @@ The session utilizes a `_hayai_app` cookie to store persistent information relat
 
 ### Exceptions
 
+This middleware provides a way to gracefully handle certain types of exceptions, and render a neatly formatted template containing useful information such as what code threw the error, and the approximate line number of the code that threw the error.
+
 ### Static Assets
 
-This middleware provides  the option to serve static assets including CSS, JavaScript, and images. A FileServer class is provided to serve the appropriate files, and is called in the event that a request comes through requesting a static asset.
+This middleware provides the option to serve static assets including CSS, JavaScript, and images. A FileServer class is provided to serve the appropriate files, and is called in the event that a request comes through requesting a static asset.
 
 ## To-Dos
 
- - Finish documentation for ORM, Flash message, Exceptions, Static Assets, CSRF protection
-
- - Implement PostgreSQL connection capability for increased database support and ability for apps built with Hayai to be hosted on Heroku
+ - Finish documentation for ORM, Flash message, Exceptions, Static Assets, CSRF protection 
 
  - Package Hayai into a gem for easy install and use.
 

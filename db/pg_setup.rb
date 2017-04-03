@@ -3,7 +3,7 @@ raise 'No database specified' unless database_name
 
 def setup_database(db_name)
   sql_file = File.join __dir__, 'pg_sql', "#{db_name}.sql"
-  
+
   begin
 
     puts "WARNING: Following action will reset database to preconfigured SQL file"
@@ -18,8 +18,9 @@ def setup_database(db_name)
     else
       puts 'exiting...'
     end
-  rescue
-    # later do error checking through ruby instead of letting shell throw error, but for now is fine
+    # use more specific exception than general exception
+  rescue Exception => e
+    puts e.message
   end
 end
 setup_database(database_name)

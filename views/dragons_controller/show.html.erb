@@ -25,9 +25,30 @@
             <div class="memory-content">
               <%= memory.content %>
             </div>
+            <form class="remove-memory" action="<%= "/memories/#{memory.id}" %>" method="post">
+              
+              <input type="hidden" name="_method" value="delete">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+              <input type="submit" name="" value="Give Amnesia">
+            </form>
           </li>
           <% end %>
         </ul>
+
+        <form class="new-memory-form" action="<%= '/memories' %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+            <input type="hidden" name="memory[dragon_id]" value="<%= @dragon.id %>">
+
+            <label for="location">Location: </label>
+            <input type="text" id='location' name="memory[location]" value="">
+
+            <label for="content">Memory: </label>
+            <input type="text" id="content" name="memory[content]" value="">
+
+            <input type="submit" name="" value="Make some memories!">
+        </form>
       </div>
 
     </div>

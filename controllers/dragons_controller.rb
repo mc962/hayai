@@ -2,7 +2,7 @@ require 'rack'
 require_relative '../lib/controller_base'
 
 
-require 'byebug'
+
 class DragonsController < ControllerBase
 
   def index
@@ -18,8 +18,6 @@ class DragonsController < ControllerBase
 
   def create
     @dragon = Dragon.new(name: params['dragon']['name'], picture_url: params['dragon']['picture_url'], rider_id: params['dragon']['rider_id'])
-
-    # @dragon.picture_url = "/public/#{params['dragon']['picture_url']}"
 
     if @dragon.save
       redirect_to('/dragons')
